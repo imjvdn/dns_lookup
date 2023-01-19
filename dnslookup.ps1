@@ -13,6 +13,5 @@ foreach($dnsServer in $dnsServers){
         Write-Host "ANSWER SECTION:"
         $nsRecords.NameHost | % { Write-Host "    $($_)" }
         Write-Host "Timestamp: $(Get-Date)"
-        Write-Host "Query time: $($nsRecords.QueryTime) ms"
     }
 }
