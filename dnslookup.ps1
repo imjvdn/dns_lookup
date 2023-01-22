@@ -22,6 +22,7 @@ foreach ($dnsServer in $dnsServers) {
                 Write-Host "A Records:"
                 $aRecords.IPAddress | % { Write-Host "        $($_)" }
             }
+            Write-Host "MX Records:"
             $mxrecords = (nslookup -q=MX $domain | Out-String) -replace "Non-authoritative answer:",""
             Write-Host $mxrecords
         }
