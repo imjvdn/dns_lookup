@@ -12,18 +12,19 @@ foreach ($dnsServer in $dnsServers) {
         $mxrecords = nslookup -q=MX $domain | Select-String "MX"
         $mxRecords = (Resolve-DnsName -Type MX -Name $domain -Server $dnsServer)
         if ($nsRecords -or $aRecords -or $mxRecords) {
-            Write-Host "*****************************************************************************************************"
-            Write-Host "DNS Server Used: $dnsServer"
+            Write-Host "*****************************************************************************************************************************************"
+            Write-Host "DNS Server Used:" -ForegroundColor Green
+            $dnsServer 
             if ($nsRecords) {
-                Write-Host "NS Records:"
-                $nsRecords.NameHost | % { Write-Host "        $($_)" }
+                Write-Host "NS Records:" -ForegroundColor Green
+                $nsRecords.NameHost | % { Write-Host "$($_)" }
             }
             if ($aRecords) {
-                Write-Host "A Records:"
-                $aRecords.IPAddress | % { Write-Host "        $($_)" }
+                Write-Host "A Records:" -ForegroundColor Green
+                $aRecords.IPAddress | % { Write-Host "$($_)" }
             }
-            Write-Host "MX Records:"
-            $mxrecords = (nslookup -q=MX $domain | Out-String) -replace "Non-authoritative answer:",""
+            Write-Host "MX Records:" -ForegroundColor Green
+            $mxrecords = (nslookup -q=MX $domain | Out-String) -replace "Non-authoritative answer:", ""
             Write-Host $mxrecords
         }
         Write-Host "Timestamp: $(Get-Date)"
