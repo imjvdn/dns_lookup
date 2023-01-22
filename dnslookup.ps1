@@ -23,15 +23,11 @@ foreach ($dnsServer in $dnsServers) {
                 Write-Host "A Records:"
                 $aRecords.IPAddress | % { Write-Host "        $($_)" }
             }
-
-            $mxrecords = (nslookup -q=MX $domain) -replace "Non-authoritative answer:", ""
+            $mxrecords = (nslookup -q=MX $domain | Out-String) -replace "Non-authoritative answer:",""
             Write-Host $mxrecords
-
         }
-       
         Write-Host "Timestamp: $(Get-Date)"
         Write-Host "Query time: $($nsRecords.QueryTime) ms"
-     
     }
     catch {
         Write-Host "An error occurred: $($_.Exception.Message)"
