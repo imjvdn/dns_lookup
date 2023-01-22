@@ -14,7 +14,6 @@ foreach ($dnsServer in $dnsServers) {
         if ($nsRecords -or $aRecords -or $mxRecords) {
             Write-Host "*****************************************************************************************************"
             Write-Host "DNS Server Used: $dnsServer"
-            Write-Host "ANSWER SECTION:"
             if ($nsRecords) {
                 Write-Host "NS Records:"
                 $nsRecords.NameHost | % { Write-Host "        $($_)" }
